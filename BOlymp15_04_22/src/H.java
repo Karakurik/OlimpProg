@@ -1,7 +1,10 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class T2 {
+public class H {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -46,21 +49,59 @@ public class T2 {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
-//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-
-        int t = nextInt();
+        int t = 1;
+//        t = nextInt();
         while (t-- > 0) {
             solve();
         }
-//        solve();
         pw.close();
     }
 
+    static int sum = -1;
+    static int[] ball;
+    static boolean[] used;
+    static int[][] p;
+
     private static void solve() {
         int n = nextInt();
-
+        int m = nextInt();
+        ball = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            ball[i] = nextInt();
+        }
+        p = new int[n + 1][2];
+        for (int i = 0; i < m; i++) {
+            int t = nextInt();
+            p[t][0] = nextInt();
+            p[t][1] = nextInt();
+        }
+        used = new boolean[n + 1];
+        calc(n, 0);
+        if (sum == -1) {
+            pw.println("No");
+        } else {
+            pw.println(sum);
+        }
     }
+
+    private static void calc(int n, int localSum) {
+        localSum += ball[n];
+        if (n == 1) {
+            if (localSum > sum) sum = localSum;
+        }
+
+        used[n] = true;
+        for (int i = 1; i < n; i++) {
+            if (used[i]) continue;
+
+            if (p[i][0] <= n && p[i][1] >= n) {
+                calc(i, localSum);
+            }
+        }
+        used[n] = false;
+    }
+
+
 }

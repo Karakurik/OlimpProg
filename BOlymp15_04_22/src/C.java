@@ -1,7 +1,12 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class T2 {
+public class C {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -46,21 +51,41 @@ public class T2 {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
-//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-
-        int t = nextInt();
+        int t = 1;
+        t = nextInt();
         while (t-- > 0) {
             solve();
         }
-//        solve();
         pw.close();
     }
 
+    static Map<Long, Long> map;
+    static long a;
+    static long b;
     private static void solve() {
-        int n = nextInt();
+       a = nextLong();
+       b = nextLong();
+       long x = nextLong();
+//       map = new HashMap<>();
+        if (x> a) {
+            pw.println(x-b+1);
+        }else {
+            pw.println(a+1-b+1);
+        }
+//       pw.println(calc(x));
+    }
 
+    public static long calc(long x) {
+        if (map.containsKey(x)) {
+            return map.get(x);
+        }
+        if (x>a) {
+            map.put(x, x-b+1);
+            return x-b+1;
+        }
+        map.put(x, calc(calc(x+b)));
+        return map.get(x);
     }
 }

@@ -1,7 +1,10 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class T2 {
+public class T3 {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -46,21 +49,47 @@ public class T2 {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
-//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-
-        int t = nextInt();
+        int t = 1;
+//        t = nextInt();
         while (t-- > 0) {
             solve();
         }
-//        solve();
         pw.close();
     }
 
     private static void solve() {
-        int n = nextInt();
-
+        char[] arr = nextLine().toCharArray();
+        int k = nextInt();
+        int cou = 0;
+        int id = -1;
+        int ans = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == '.') cou++;
+            if (cou > k) {
+                ans = Math.max(ans, i - id - 1);
+                id++;
+                while (arr[id] != '.') id++;
+                cou--;
+                ans = Math.max(ans, i - id);
+            }
+        }
+        if (id == -1) {
+            ans = arr.length;
+        } else {
+            ans = Math.max(ans, arr.length - id - 1);
+        }
+        pw.println(ans);
     }
 }
+
+/*
+X...X..XX
+3
+*/
+
+/*
+XXXX
+239
+*/

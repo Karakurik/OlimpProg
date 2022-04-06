@@ -1,7 +1,14 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class T2 {
+public class D {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -46,21 +53,31 @@ public class T2 {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
-//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-
-        int t = nextInt();
+        int t = 1;
+//        t = nextInt();
         while (t-- > 0) {
             solve();
         }
-//        solve();
         pw.close();
     }
 
     private static void solve() {
         int n = nextInt();
-
+        int k = nextInt();
+        int a0 = nextInt();
+        int x = nextInt();
+        int y = nextInt();
+        List<Integer> list = new ArrayList<>();
+        int dva30 = (int) Math.pow(2, 30);
+        list.add(a0);
+        for (int i = 1; i < n; i++) {
+            a0 = (a0*x+y)%dva30;
+        }
+        Collections.sort(list);
+        for (int i = 0; i < k; i++) {
+            pw.println(list.get(i) + " ");
+        }
     }
 }

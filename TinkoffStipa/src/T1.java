@@ -1,7 +1,11 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class T2 {
+public class T1 {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -46,21 +50,48 @@ public class T2 {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
-//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-
-        int t = nextInt();
+        int t = 1;
+//        t = nextInt();
         while (t-- > 0) {
             solve();
         }
-//        solve();
         pw.close();
     }
 
     private static void solve() {
+        String x = nextLine();
         int n = nextInt();
-
+        String[] arr = new String[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = nextLine();
+        }
+        Arrays.sort(arr, (o1, o2) -> {
+            if (o1.equals(o2)) return 0;
+            for (int i = 0; i < Math.min(o1.length(), o2.length()); i++) {
+                if (x.indexOf(o1.charAt(i)) < x.indexOf(o2.charAt(i))) {
+                    return -1;
+                }
+                if (x.indexOf(o1.charAt(i)) > x.indexOf(o2.charAt(i))) {
+                    return 1;
+                }
+            }
+            return o1.length() - o2.length();
+        });
+        for (String s : arr) {
+            pw.println(s);
+        }
     }
 }
+
+/*
+zyxwvutsrqponmlkjihgfedcba
+6
+abd
+bsk
+ak
+a
+b
+ldlajd
+*/

@@ -1,7 +1,10 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class T2 {
+public class A {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -46,21 +49,26 @@ public class T2 {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
-//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-
-        int t = nextInt();
+        int t = 1;
+//        t = nextInt();
         while (t-- > 0) {
             solve();
         }
-//        solve();
         pw.close();
     }
 
     private static void solve() {
         int n = nextInt();
-
+        String s = nextLine();
+        String str = "BSUIROPEN";
+        int cou = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (str.charAt(j) != s.charAt(i * 9 + j)) cou++;
+            }
+        }
+        pw.println(cou);
     }
 }

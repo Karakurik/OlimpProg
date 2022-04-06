@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Icpc2021_1/4_21_11_21/Icpc2021_1/4_21_11_21.iml" filepath="$PROJECT_DIR$/Icpc2021_1/4_21_11_21/Icpc2021_1/4_21_11_21.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BOlymp15_04_22/BOlymp15_04_22.iml" filepath="$PROJECT_DIR$/BOlymp15_04_22/BOlymp15_04_22.iml" />
       <module fileurl="file://$PROJECT_DIR$/Bacs_03_04_33/Bacs_03_04_33.iml" filepath="$PROJECT_DIR$/Bacs_03_04_33/Bacs_03_04_33.iml" />
       <module fileurl="file://$PROJECT_DIR$/CF117/CF117.iml" filepath="$PROJECT_DIR$/CF117/CF117.iml" />
       <module fileurl="file://$PROJECT_DIR$/CF118/CF118.iml" filepath="$PROJECT_DIR$/CF118/CF118.iml" />
@@ -28,8 +29,10 @@
       <module fileurl="file://$PROJECT_DIR$/KFU13_02_22/KFU13_02_22.iml" filepath="$PROJECT_DIR$/KFU13_02_22/KFU13_02_22.iml" />
       <module fileurl="file://$PROJECT_DIR$/KfuOlymp_31_10_21/KfuOlymp_31_10_21.iml" filepath="$PROJECT_DIR$/KfuOlymp_31_10_21/KfuOlymp_31_10_21.iml" />
       <module fileurl="file://$PROJECT_DIR$/OlimpProg.iml" filepath="$PROJECT_DIR$/OlimpProg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RuCode5Kval/RuCode5Kval.iml" filepath="$PROJECT_DIR$/RuCode5Kval/RuCode5Kval.iml" />
       <module fileurl="file://$PROJECT_DIR$/TinkoffQA_16_03_22/TinkoffQA_16_03_22.iml" filepath="$PROJECT_DIR$/TinkoffQA_16_03_22/TinkoffQA_16_03_22.iml" />
       <module fileurl="file://$PROJECT_DIR$/TinkoffStart_18_03_22/TinkoffStart_18_03_22.iml" filepath="$PROJECT_DIR$/TinkoffStart_18_03_22/TinkoffStart_18_03_22.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TinkoffStipa/TinkoffStipa.iml" filepath="$PROJECT_DIR$/TinkoffStipa/TinkoffStipa.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tinkoff_fintech_03_02_22/Tinkoff_fintech_03_02_22.iml" filepath="$PROJECT_DIR$/Tinkoff_fintech_03_02_22/Tinkoff_fintech_03_02_22.iml" />
       <module fileurl="file://$PROJECT_DIR$/YandexCubCval/YandexCubCval.iml" filepath="$PROJECT_DIR$/YandexCubCval/YandexCubCval.iml" />
       <module fileurl="file://$PROJECT_DIR$/div2_1/div2_1.iml" filepath="$PROJECT_DIR$/div2_1/div2_1.iml" />

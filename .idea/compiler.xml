@@ -9,6 +9,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="BOlymp15_04_22" target="11" />
       <module name="Hello2022" target="8" />
     </bytecodeTargetLevel>
   </component>
