@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class Kubik {
+public class C {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -52,46 +52,16 @@ public class Kubik {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
         int t = 1;
-//        t = nextInt();
+        t = nextInt();
         while (t-- > 0) {
             solve();
         }
         pw.close();
     }
 
-    static double a;
-    static double b;
-    static double c;
-    static double d;
-
     private static void solve() {
-        a = nextDouble();
-        b = nextDouble();
-        c = nextDouble();
-        d = nextDouble();
-        double l = Float.MIN_VALUE;
-        double r = Float.MAX_VALUE;
-        double m = (l + r) / 2;
-        double ans = m;
-        double ansRes = calc(m);
-        while (r - l > 0) {
-            m = (l + r) / 2;
-            double res = calc(m);
-            if (res < ansRes) {
-                ansRes = res;
-                ans = m;
-            }
-            if (res == 0) break;
-            if (res >= 0) {
-                r = m;
-            } else {
-                l = m;
-            }
-        }
-        pw.println(ans);
-    }
+        int n = nextInt();
 
-    private static double calc(double x) {
-        return ((a * x + b) * x + c) * x + d;
+
     }
 }

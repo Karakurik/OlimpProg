@@ -1,7 +1,10 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.*;
 
-public class Main {
+public class B {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -46,16 +49,40 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
-//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-        int []a = {5,5};
-        int b = 1;
-        a[b] = b = 0;
-        System.out.println(Arrays.toString(a));
-        byte x[];
-
+        int t = 1;
+//        t = nextInt();
+        while (t-- > 0) {
+            solve();
+        }
         pw.close();
     }
+
+    private static void solve() {
+        int n = nextInt();
+        Map<Set<String>, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            Set<String> set = new HashSet<>(Arrays.asList(nextLine().split(" ")));
+            map.put(set, map.containsKey(set) ? map.get(set) + 1 : 1);
+        }
+        int ans = 0;
+        for (Integer i : map.values()) {
+            ans = Math.max(ans, i);
+        }
+        pw.println(ans);
+    }
 }
+
+/* Test1
+5
+MIKHAIL VLADISLAV GRIGORY
+VLADISLAV MIKHAIL GRIGORY
+IVAN ILYA VLADIMIR
+ANDREY VLADIMIR ILYA
+VLADIMIR IVAN ANDREY
+*/
+
+/* Answer1
+2
+*/

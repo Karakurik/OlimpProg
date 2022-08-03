@@ -61,9 +61,13 @@ public class A {
 
     private static void solve() {
         int n = nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = nextInt();
+        int f = nextInt();
+        boolean flag = true;
+        for (int i = 1; i < n; i++) {
+            if (nextInt()%f!=0) {
+                flag = false;
+            }
         }
+        pw.println(flag?"YES":"NO");
     }
 }

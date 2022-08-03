@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class tin1 {
+public class B {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -52,7 +52,7 @@ public class tin1 {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
         int t = 1;
-//        t = nextInt();
+        t = nextInt();
         while (t-- > 0) {
             solve();
         }
@@ -60,53 +60,23 @@ public class tin1 {
     }
 
     private static void solve() {
-        int maxL = 1;
-        int maxLId = 1;
         int n = nextInt();
-        int[] val = new int[n+1];
+        int l = nextInt();
+        int r = nextInt();
+        int[] arr = new int[n + 1];
         for (int i = 1; i <= n; i++) {
-            val[i] = nextInt();
+            arr[i] = ((l - 1) / i + 1) * i;
+            if (arr[i] > r) {
+                pw.println("NO");
+                return;
+            }
         }
 
-        int[][] dp = new int[n + 1][2];
-        dp[1][0] = 1;
-        dp[1][1] = 1;
-        for (int i = 2; i <= n; i++) {
-            int id = i - 1;
-            while (val[id] >= val[i]) {
-                id--;
-                if (id == 0) break;
-            }
-            if (id == 0) {
-                dp[i][0] = 1;
-                dp[i][1] = 1;
-                continue;
-            }
-            for (int j = 1; j < i; j++) {
-                if (dp[id][0] < dp[j][0] && val[i] > val[j]) {
-                    id = j;
-                }
-            }
-
-            int cou = 0;
-            for (int j = 1; j <= i-1; j++) {
-                if (dp[id][0] == dp[j][0]) {
-                    cou += dp[j][1];
-                }
-            }
-            dp[i][0] = dp[id][0]+1;
-            dp[i][1] = cou;
-            if (dp[i][0]>maxL) {
-                maxL=dp[i][0];
-                maxLId = id;
-            }
-        }
-        int ans = 0;
+        pw.println("YES");
         for (int i = 1; i <= n; i++) {
-            if (maxL == dp[i][0]) {
-                ans += dp[i][1];
-            }
+            pw.print(arr[i] + " ");
         }
-        pw.println(ans);
+        pw.println();
+
     }
 }
