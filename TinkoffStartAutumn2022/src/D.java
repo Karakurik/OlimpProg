@@ -48,8 +48,8 @@ public class D {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(System.in));
-        br = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\OlimpProg\\TinkoffStartAutumn2022\\src\\input.txt")));
+        br = new BufferedReader(new InputStreamReader(System.in));
+//        br = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\OlimpProg\\TinkoffStartAutumn2022\\src\\input.txt")));
         pw = new PrintWriter(System.out);
         int t = 1;
 //        t = nextInt();
