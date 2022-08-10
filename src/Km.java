@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Km {
     static long[] ans;
     static long accum = 0;
@@ -8,7 +10,7 @@ public class Km {
         ans = new long[11];
         counter(0);
         System.out.println(accum);
-        System.out.println(ans.toString());
+        System.out.println(Arrays.toString(ans));
     }
 
     public static void counter(int x) {

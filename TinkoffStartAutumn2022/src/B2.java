@@ -2,10 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class F {
+public class B2 {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -62,67 +61,29 @@ public class F {
 
     private static void solve() {
         int n = nextInt();
-        Lift[] lifts = new Lift[n];
+        Map<List<String>, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            lifts[i] = new Lift(nextInt(), nextInt());
+            List<String> list = Arrays.asList(nextLine().split(" "));
+            Collections.sort(list);
+            map.put(list, map.containsKey(list) ? map.get(list) + 1 : 1);
         }
-        Arrays.sort(lifts);
-        int end = lifts[n - 1].b;
-        int[] ans = new int[end + 1];
-        int it = 0;
-        try {
-            for (int i = 0; i <= end; i++) {
-                if (i < lifts[it].b) continue;
-                while (it < n && lifts[it].b < i) it++;
-
-                int cou = 0;
-                while (it < n && lifts[it].a == lifts[it].b) {
-                    cou++;
-                    it++;
-                }
-
-                while (it < n && lifts[it].b == i) {
-                    ans[i] = Math.max(ans[i], cou + ans[lifts[it].a] + 1);
-                    it++;
-                }
-            }
-        } catch (Exception ignored) {
-
+        int ans = 0;
+        for (Integer i : map.values()) {
+            ans = Math.max(ans, i);
         }
-        pw.println(Arrays.stream(ans).max().orElse(0));
-    }
-
-    static class Lift implements Comparable<Lift> {
-        int a;
-        int b;
-
-        public Lift(int a, int b) {
-            this.a = a;
-            this.b = b;
-        }
-
-        @Override
-        public int compareTo(Lift o) {
-            if (b == o.b) {
-                return o.a - a;
-            } else {
-                return b - o.b;
-            }
-        }
+        pw.println(ans);
     }
 }
 
 /* Test1
-7
-2 6
-5 6
-2 5
-2 2
-6 8
-2 2
-0 2
+5
+MIKHAIL VLADISLAV GRIGORY
+VLADISLAV MIKHAIL GRIGORY
+IVAN ILYA VLADIMIR
+ANDREY VLADIMIR ILYA
+VLADIMIR IVAN ANDREY
 */
 
 /* Answer1
-6
+2
 */

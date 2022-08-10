@@ -2,10 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class F {
+public class A2 {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -61,68 +60,37 @@ public class F {
     }
 
     private static void solve() {
-        int n = nextInt();
-        Lift[] lifts = new Lift[n];
-        for (int i = 0; i < n; i++) {
-            lifts[i] = new Lift(nextInt(), nextInt());
+        int minX = nextInt();
+        int minY = nextInt();
+        int maxX = minX;
+        int maxY = minY;
+        for (int i = 0; i < 3; i++) {
+            int x = nextInt();
+            int y = nextInt();
+            minX = Math.min(minX, x);
+            maxX = Math.max(maxX, x);
+            minY = Math.min(minY, y);
+            maxY = Math.max(maxY, y);
         }
-        Arrays.sort(lifts);
-        int end = lifts[n - 1].b;
-        int[] ans = new int[end + 1];
-        int it = 0;
-        try {
-            for (int i = 0; i <= end; i++) {
-                if (i < lifts[it].b) continue;
-                while (it < n && lifts[it].b < i) it++;
-
-                int cou = 0;
-                while (it < n && lifts[it].a == lifts[it].b) {
-                    cou++;
-                    it++;
-                }
-
-                while (it < n && lifts[it].b == i) {
-                    ans[i] = Math.max(ans[i], cou + ans[lifts[it].a] + 1);
-                    it++;
-                }
-            }
-        } catch (Exception ignored) {
-
-        }
-        pw.println(Arrays.stream(ans).max().orElse(0));
+        pw.println((int) Math.pow(Math.max(maxX-minX, maxY-minY), 2));
     }
 
-    static class Lift implements Comparable<Lift> {
-        int a;
-        int b;
+    static class Point {
+        int x;
+        int y;
 
-        public Lift(int a, int b) {
-            this.a = a;
-            this.b = b;
-        }
-
-        @Override
-        public int compareTo(Lift o) {
-            if (b == o.b) {
-                return o.a - a;
-            } else {
-                return b - o.b;
-            }
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 }
 
 /* Test1
-7
-2 6
-5 6
-2 5
-2 2
-6 8
-2 2
-0 2
+6 6 8 8
+1 8 4 9
 */
 
 /* Answer1
-6
+49
 */
