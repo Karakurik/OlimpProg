@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 public class K {
@@ -51,7 +54,8 @@ public class K {
 //        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
 
-        int t = nextInt();
+        int t = 1;
+//        t = nextInt();
         while (t-- > 0) {
             solve();
         }
@@ -61,6 +65,32 @@ public class K {
 
     private static void solve() {
         int n = nextInt();
-
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = nextInt();
+        }
+        int l = 0;
+        int r = 2 * 100000;
+        int potAns = r;
+        while (l <= r) {
+            int m = (l + r) / 2;
+            boolean flag = true;
+            long akk = 0;
+            for (int i = 0; i < n; i++) {
+                long rub = Math.max(akk + arr[i] - m, 0);
+                if (rub > m) {
+                    flag = false;
+                }
+                akk = 2 * rub;
+            }
+            if (akk > 0) flag = false;
+            if (flag) {
+                potAns = Math.min(potAns, m);
+                r = m-1;
+            } else {
+                l = m + 1;
+            }
+        }
+        pw.println(potAns);
     }
 }

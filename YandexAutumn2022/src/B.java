@@ -63,15 +63,15 @@ public class B {
         int n = nextInt();
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            String[] s = nextLine().split(" ");
-            int a = Integer.parseInt(s[1]);
-            for (int j = 2; j < 4; j++) {
-                a = Math.max(a, Integer.parseInt(s[j]));
+            nextToken();
+            int[] arr = new int[3];
+            for (int j = 0; j < 3; j++) {
+                arr[j] = nextInt();
             }
-            list.add(a);
+            list.add(Arrays.stream(arr).max().getAsInt());
         }
         Collections.sort(list);
-        int ans = list.get((list.size()-1)/2);
+        int ans = list.get((list.size() - 1) / 2);
         pw.println(ans);
     }
 }

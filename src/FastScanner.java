@@ -2,8 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.StringTokenizer;
 
 public class FastScanner {
     static BufferedReader br;
@@ -16,7 +15,7 @@ public class FastScanner {
                 st = new StringTokenizer(br.readLine());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return st.nextToken();
     }
@@ -37,7 +36,7 @@ public class FastScanner {
         try {
             return br.readLine();
         } catch (IOException e) {
-            throw new IllegalArgumentException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -45,11 +44,11 @@ public class FastScanner {
         try {
             return (char) br.read();
         } catch (IOException e) {
-            throw new IllegalArgumentException(e);
+            throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
         int t = 1;
@@ -57,6 +56,7 @@ public class FastScanner {
         while (t-- > 0) {
             solve();
         }
+
         pw.close();
     }
 

@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 public class L {
@@ -60,7 +63,17 @@ public class L {
     }
 
     private static void solve() {
-        int n = nextInt();
-
+        int x = nextInt();
+        int y = nextInt();
+        int d = x + y;
+        if (d % 2 == 1) {
+            pw.println("-1 -1");
+            return;
+        }
+        if (y < x) {
+            pw.printf("%d %d\n", d/2 - y, y);
+        } else {
+            pw.printf("%d %d\n", x, d/2 - x);
+        }
     }
 }

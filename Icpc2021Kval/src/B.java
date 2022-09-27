@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 public class B {
@@ -61,6 +64,38 @@ public class B {
 
     private static void solve() {
         int n = nextInt();
-
+        int a = nextInt();
+        int b = nextInt();
+        int[] arr = new int[n];
+        arr[0] = a;
+        arr[n - 1] = b;
+        int cur = n;
+        for (int i = 1; i < n / 2; i++) {
+            while (cur == a || cur == b) {
+                cur--;
+            }
+            if (cur < a || cur < 1) {
+                pw.println(-1);
+                return;
+            }
+            arr[i] = cur;
+            cur--;
+        }
+        cur = 1;
+        for (int i = n / 2; i < n - 1; i++) {
+            while (cur == a || cur == b) {
+                cur++;
+            }
+            if (cur > b || cur > n) {
+                pw.println(-1);
+                return;
+            }
+            arr[i] = cur;
+            cur++;
+        }
+        for (int x : arr) {
+            pw.printf("%d ", x);
+        }
+        pw.println();
     }
 }

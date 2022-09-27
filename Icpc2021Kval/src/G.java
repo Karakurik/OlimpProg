@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class G {
     static BufferedReader br;
@@ -54,70 +54,42 @@ public class G {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
 
-//        int t = nextInt();
-//        while (t-- > 0) {
-//            solve();
-//        }
+        int t = 1;
+        t = nextInt();
+        while (t-- > 0) {
+            solve();
+        }
 
-        solve();
+//        solve();
 
         pw.close();
     }
 
     private static void solve() {
-        int n = nextInt();
-        ArrayList<Integer>[] arr = new ArrayList[100001];
-        for (int i = 0; i < 100001; i++) {
-            arr[i] = new ArrayList<>();
-        }
-        int[] val = new int[n];
-        int max = 0;
-        for (int i = 0; i < n; i++) {
-            int x = nextInt();
-            if (x == 1) {
-                arr[1].add(x);
-                continue;
+        long k = nextLong();
+        long x = nextLong();
+        long l = 1;
+        long r = 2 * k - 1;
+        long potAns = l;
+        while (l <= r) {
+            long m = (l + r) / 2;
+            long cou = 0;
+            long couM = 2 * k - m;
+            if (m <= k) {
+                couM = m;
+                cou += m * (m + 1) / 2;
+            } else {
+                cou += k * (k + 1) / 2;
+                cou += k * (k - 1) / 2;
+                cou -= couM * (couM - 1) / 2;
             }
-            if (x <= 100000) {
-                arr[x].add(x);
-            }
-            if (x > max) {
-                max = x;
-            }
-            int Rx = x;
-            for (int j = 2; j <= Math.sqrt(Rx); j++) {
-                if (x % j == 0) {
-                    int cou = 1;
-                    x /= j;
-                    while (x % j == 0) {
-                        cou++;
-                        x /= j;
-                    }
-                    if (x > 1) {
-                        continue;
-                    }
-                    int m = j;
-                    arr[m].add(Rx);
-                    while (cou % 2 == 0) {
-                        m*=2;
-                        if (m!=Rx) {
-                            arr[m].add(Rx);
-                        }
-                        cou/=2;
-                    }
-                }
+            if (cou - couM < x) {
+                potAns = Math.max(potAns, m);
+                l = m + 1;
+            } else {
+                r = m - 1;
             }
         }
-
-        for (int i = 1; i < 100001 ; i++) {
-            int sum = 0;
-            for(int x: arr[i]) {
-                sum+=x;
-            }
-            if (sum>max) {
-                max = sum;
-            }
-        }
-        pw.println(max);
+        pw.println(potAns);
     }
 }

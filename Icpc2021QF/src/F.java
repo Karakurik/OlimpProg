@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class F {
     static BufferedReader br;
@@ -60,16 +60,43 @@ public class F {
     }
 
     private static void solve() {
-        int a = nextInt();
-        int b = nextInt();
-        int x = nextInt();
-        while (a!=b) {
-            if (a>b) {
-                a -= b;
-            } else {
-                b -=a;
+        long time = System.currentTimeMillis();
+        int n = nextInt();
+        HashSet<Integer>[] sets = new HashSet[33];
+        int e = 1_000_000_000;
+        for (int x = 2; x < 33; x++) {
+            sets[x] = new HashSet<>();
+            long t = x;
+            while (t <= e) {
+                sets[x].add((int) t);
+                t *= x;
             }
         }
+        HashMap<Integer, Long> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int t = nextInt();
+            if (map.containsKey(t)) {
+                map.put(t, map.get(t) + t);
+            } else {
+                map.put(t, (long) t);
+            }
+            for (int j = 2; j < 33; j++) {
+                if (sets[j].contains(t)) {
+                    if (j!=t) {
+                        if (map.containsKey(j)) {
+                            map.put(j, map.get(j) + t);
+                        } else {
+                            map.put(j, (long) t);
+                        }
+                    }
 
+                }
+            }
+        }
+        long ans = 0;
+        for (HashMap.Entry<Integer, Long> el: map.entrySet()) {
+            ans = Math.max(ans, el.getValue());
+        }
+        pw.println(ans);
     }
 }

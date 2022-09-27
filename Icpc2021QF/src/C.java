@@ -51,87 +51,81 @@ public class C {
     }
 
     public static void main(String[] args) throws IOException {
+//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
+//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-        int t = 1;
-        t = nextInt();
+
+        int t = nextInt();
         while (t-- > 0) {
             solve();
         }
+//        solve();
         pw.close();
     }
-
-    static List<Integer> listA;
-    static List<Integer> listB;
-    static int x;
-    static int y;
 
     private static void solve() {
         int n = nextInt();
         int k = nextInt();
-        currentX = new ArrayList[k+1];
-        for (int i = 0; i <= k; i++) {
-            currentX[i] = new ArrayList<>();
-        }
-        x = nextInt();
-        y = nextInt();
-        listA = new ArrayList<>();
-        listB = new ArrayList<>();
+        int x = nextInt();
+        int y = nextInt();
+        List<Integer> A = new ArrayList<>();
+        List<Integer> B = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            String s = nextLine();
-            int t = Integer.parseInt(s.substring(2));
-            char c = s.charAt(0);
-            if (c == 'A') {
-                listA.add(t);
+            if (nextToken().equals("A")) {
+                A.add(nextInt());
             } else {
-                listB.add(t);
+                B.add(nextInt());
             }
         }
+        A.sort((o1, o2) -> o2 - o1);
+        B.sort((o1, o2) -> o2 - o1);
+        long ans = 0;
         int idA = 0;
         int idB = 0;
-        long answer = 0L;
-        listA.sort((o1, o2) -> {
-            return o2 - o1;
-        });
-        listB.sort((o1, o2) -> {
-            return o2 - o1;
-        });
-
-        pw.println(test(k, idA, idB, 0));
-    }
-
-    static ArrayList<Long>[] currentX;
-    private static long test(int k, int idA, int idB, long currentAns) {
-        if (k == 0) return currentAns;
-        if (currentX[k].contains(currentAns)) {
-            return -1000_000_000_000_000_000L;
+        int cou = 0;
+        while (cou < 2 * k) {
+            if (A.size() > idA) {
+                if (idA >= k) {
+                    ans -= y;
+                }
+                ans += A.get(idA++);
+                cou++;
+            }
+            if (B.size() > idB) {
+                if (idB >= k) {
+                    ans -= y;
+                }
+                ans += B.get(idB++);
+                cou++;
+            }
         }
-        currentX[k].add(currentAns);
-        if (idA >= listA.size()) {
-            return test(k - 1, idA, idB + 2, listB.get(idB) + listB.get(idB + 1)-y);
+        for (int i = idB; i < B.size(); i++) {
+            try {
+                if (B.get(idB) - y > A.get(idA - 1)) {
+                    ans += B.get(idB) - y - A.get(idA - 1);
+                    idB++;
+                    idA--;
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                break;
+            }
         }
-        if (idB >= listB.size()) {
-            return test(k - 1, idA + 2, idB, listA.get(idA) + listA.get(idA + 1)-x);
+        for (int i = idA; i < A.size(); i++) {
+            try {
+                if (A.get(idA) - x > B.get(idB - 1)) {
+                    ans += A.get(idA) - x - B.get(idB - 1);
+                    idA++;
+                    idB--;
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                break;
+            }
         }
-        Integer AA = null;
-        Integer AB = listA.get(idA) + listB.get(idB);
-        Integer BB = null;
-        if (idA + 1 < listA.size()) {
-            AA = listA.get(idA) + listA.get(idA + 1) - x;
-        }
-        if (idB + 1 < listB.size()) {
-            BB = listB.get(idB) + listB.get(idB + 1) - y;
-        }
-
-        if (AA == null && BB == null) {
-            return test(k - 1, idA + 1, idB + 1, AB);
-
-        } else if (AA == null) {
-            return Math.max(test(k - 1, idA + 1, idB + 1, AB), test(k - 1, idA, idB + 2, BB));
-        } else if (BB == null) {
-            return Math.max(test(k - 1, idA + 1, idB + 1, AB), test(k - 1, idA + 2, idB, AA));
-        } else {
-            return Math.max(test(k - 1, idA + 2, idB, AA), Math.max(test(k - 1, idA + 1, idB + 1, AB), test(k - 1, idA, idB + 2, BB)));
-        }
+        pw.println(ans);
     }
 }

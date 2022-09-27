@@ -60,7 +60,22 @@ public class M {
     }
 
     private static void solve() {
-        int n = nextInt();
+        int n1 = nextInt();
+        int n2 = nextInt();
+        int n3 = nextInt();
+        String s1 = nextLine().toLowerCase();
+        String s2 = nextLine().toLowerCase();
+        String s3 = nextLine().toLowerCase();
+        pw.println(check(n1, s1, 5) && check(n2, s2, 7) && check(n3, s3, 5) ? "YES":"NO");
+    }
 
+    private static boolean check(int n1, String s1, int i) {
+        String s = "aeiou";
+        int cou = 0, couY = 0;
+        for (char c: s1.toCharArray()) {
+            if (c == 'y') couY++;
+            if (s.indexOf(c) >=0) cou++;
+        }
+        return cou <= i && cou + couY >= i;
     }
 }
