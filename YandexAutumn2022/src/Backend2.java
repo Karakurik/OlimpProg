@@ -1,9 +1,12 @@
-import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class FastScanner {
+public class Backend2 {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -48,46 +51,46 @@ public class FastScanner {
     }
 
     public static void main(String[] args) throws IOException {
-//        br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         br = new BufferedReader(new InputStreamReader(System.in));
-//        pw = new PrintWriter(new FileWriter("output.txt"));
         pw = new PrintWriter(System.out);
-        solve();
+        int t = 1;
+//        t = nextInt();
+        while (t-- > 0) {
+            solve();
+        }
         pw.close();
     }
 
     private static void solve() {
         int n = nextInt();
-        int s = nextInt();
-        int t = nextInt();
-        int[][] arr = new int[n][3];
-        for (int i = 0; i < n; i++) {
-            arr[i][0] = nextInt();
-            arr[i][1] = i;
-        }
-        Arrays.sort(arr, Comparator.comparingInt(o -> o[0]));
-        int[] time = new int[t];
-        time[arr[0][0] % t]++;
-        arr[0][2] = 1;
-        s--;
-        for (int i = 1; i < n; i++) {
-            if (arr[i][0] != arr[i-1][0]) {
-                for (int j = arr[i-1][0]%t+1; j <= arr[i][0]%t + t && j%t!=arr[i][0]%t; j++) {
-                    s += time[j%t];
-                    time[j%t] = 0;
+        int q = nextInt();
+        Map<Integer, Node> map = new HashMap<>();
+        for (int i = 1; i <= n; i++) {
+            Node newNode = new Node();
+            int t = i / 2;
+            if (t >= 1) {
+                newNode.parent = map.get(t);
+                if (2 * t == i) {
+                    map.get(t).left = newNode;
+                } else {
+                    map.get(t).right = newNode;
                 }
-                s += time[arr[i][0]%t];
-                time[arr[i][0]%t] = 0;
-            }
-            if (s > 0) {
-                arr[i][2] = 1;
-                s--;
-                time[arr[i][0] % t]++;
             }
         }
-        Arrays.sort(arr, Comparator.comparingInt(o -> o[1]));
-        for (int i = 0; i < n; i++) {
-            pw.println(arr[i][2] == 1?"YES":"NO");
+        for (int i = 0; i < q; i++) {
+            int t = nextInt();
+            Node с = map.get(t);
+            Node p = с.parent;
+            Node pp = p.parent;
+            if (pp == null) {
+
+            }
         }
+    }
+
+    static class Node {
+        Node parent;
+        Node left;
+        Node right;
     }
 }

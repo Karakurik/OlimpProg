@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PtzSummer-2022/Day 5/Day 5.iml" filepath="$PROJECT_DIR$/PtzSummer-2022/Day 5/Day 5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PtzSummer-2022/Day1/Day1.iml" filepath="$PROJECT_DIR$/PtzSummer-2022/Day1/Day1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PtzSummer-2022/Day3/Day3.iml" filepath="$PROJECT_DIR$/PtzSummer-2022/Day3/Day3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KM/KM.iml" filepath="$PROJECT_DIR$/KM/KM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Leet/Leet.iml" filepath="$PROJECT_DIR$/Leet/Leet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OlimpProg.iml" filepath="$PROJECT_DIR$/OlimpProg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PtzSummer-2022/PtzSummer-2022.iml" filepath="$PROJECT_DIR$/PtzSummer-2022/PtzSummer-2022.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TinkoffStartAutumn2022/TinkoffStartAutumn2022.iml" filepath="$PROJECT_DIR$/TinkoffStartAutumn2022/TinkoffStartAutumn2022.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YandexAutumn2022/TrainA1/TrainA1.iml" filepath="$PROJECT_DIR$/YandexAutumn2022/TrainA1/TrainA1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YandexAutumn2022/YandexAutumn2022.iml" filepath="$PROJECT_DIR$/YandexAutumn2022/YandexAutumn2022.iml" />
+    </modules>
+  </component>
+</project>
