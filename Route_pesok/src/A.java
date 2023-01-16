@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class Main {
+public class A {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -24,13 +24,43 @@ public class Main {
         return Integer.parseInt(nextToken());
     }
 
+    static long nextLong() {
+        return Long.parseLong(nextToken());
+    }
+
+    static double nextDouble() {
+        return Double.parseDouble(nextToken());
+    }
+
+    static String nextLine() {
+        try {
+            return br.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static char nextChar() {
+        try {
+            return (char) br.read();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void main(String[] args) {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
-
-        pw.println(nextInt() + nextInt());
+        int t = 1;
+        t = nextInt();
+        while (t-- > 0) {
+            solve();
+        }
 
         pw.close();
+    }
+
+    private static void solve() {
+        pw.println(nextInt() + nextInt());
     }
 }

@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.*;
 
-public class D {
+public class J {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -15,7 +15,7 @@ public class D {
                 st = new StringTokenizer(br.readLine());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return st.nextToken();
     }
@@ -36,7 +36,7 @@ public class D {
         try {
             return br.readLine();
         } catch (IOException e) {
-            throw new IllegalArgumentException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -44,11 +44,11 @@ public class D {
         try {
             return (char) br.read();
         } catch (IOException e) {
-            throw new IllegalArgumentException(e);
+            throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
         int t = 1;
@@ -56,38 +56,52 @@ public class D {
         while (t-- > 0) {
             solve();
         }
+
         pw.close();
     }
 
+    static Map<String, List<String>> map;
+
     private static void solve() {
-        int h = nextInt();
         int n = nextInt();
-        int[] arr = new int[n];
+        map = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            arr[i] = nextInt();
+            String str = nextLine();
+            StringBuilder sb = new StringBuilder(str).reverse();
+            while (sb.length() >= 0) {
+                String helpStr = sb.toString();
+                if (!map.containsKey(helpStr)) {
+                    map.put(helpStr, new ArrayList<>());
+                }
+                map.get(helpStr).add(str);
+                if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
+                else break;
+            }
         }
-        int l = 0;
-        int r = Integer.MAX_VALUE;
-        int ans = 0;
-        while (l <= r) {
-            int m = (l + r)/2;
-            int t = m;
-            int cou = 0;
-            for (int i = 0; i < n; i++) {
-                t -= arr[i];
-                if (t <= 0) {
-                    t = m;
-                    cou++;
-                    if (cou>=h) break;
+
+        int q = nextInt();
+        for (int i = 0; i < q; i++) {
+            go();
+        }
+    }
+
+    private static void go() {
+        String str = nextLine();
+        StringBuilder sb = new StringBuilder(str).reverse();
+        while (sb.length() >= 0) {
+            String helpStr = sb.toString();
+            if (map.containsKey(helpStr)) {
+                for (String cand : map.get(helpStr)) {
+                    if (!cand.equals(str)) {
+                        pw.println(cand);
+                        return;
+                    }
                 }
             }
-            if (cou>=h) {
-                ans = Math.max(ans, m);
-                l = m + 1;
-            } else {
-                r = m-1;
-            }
+            if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
+            else break;
         }
-        pw.println(ans);
+
     }
+
 }

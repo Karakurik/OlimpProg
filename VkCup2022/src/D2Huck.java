@@ -68,31 +68,78 @@ public class D2Huck {
 
     private static void solve() {
         List<String> list = new ArrayList<>();
-        list.add("KS QD 8D QC 8S 8C JD 9H AC TH 9S 9D QH 7H 8H TS 7S 9C\n" +
-                "6D JS 7D KH QS TC AD AS KC 6C 7C TD AH KD 6S JC JH 6H\n");
-        list.add("JC JS 8S TD JD KH 7D 9C KC TH QD 8D 7H TC KD 9H 8C 6D\n" +
-                "7S AC QH AD 8H TS 6H JH 6C AH 7C 6S 9D QC AS QS KS 9S\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TC TD JC JD QC QD KC KD AC AD\n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TS TH JS JH QS QH KS KH AS AH\n");
+        list.add("6C 6D 7C 7D 8D 8S 8H 9C 9D TC TD JC JD QC QD KC KD AC\n" +
+                "6S 6H 7S 7H 8C 9S 9H TS TH JS JH QS QH KS KH AD AS AH\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TC TD JC JD QC QD KD KH AD AH\n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TS TH JS JH QS QH KC KS AC AS\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TC TD JC JD QD QH KD KH AD AH \n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TS TH JS JH QC QS KC KS AC AS\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TC TD JD JH QD QH KD KH AD AH\n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TS TH JC JS QC QS KC KS AC AS\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TD TH JD JH QD QH KD KH AD AH\n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TC TS JC JS QC QS KC KS AC AS\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TD TH JD JH QD QH KS KH AS AH\n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TC TS JC JS QC QS KC KD AC AD\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TD TH JD JH QS QH KS KH AS AH\n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TC TS JC JS QC QD KC KD AC AD\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TD TH JS JH QS QH KS KH AS AH\n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TC TS JC JD QC QD KC KD AC AD\n");
+        list.add("6C 6D 7C 7D 8C 8D 9C 9D TS TH JS JH QS QH KS KH AS AH\n" +
+                "6S 6H 7S 7H 8S 8H 9S 9H TC TD JC JD QC QD KC KD AC AD\n");
+        list.add("6D 6H 7D 7H 8C 8D 9D 9H TS TH JS JH QS QH KS KH AS AH\n" +
+                "6C 6S 7C 7S 8S 8H 9C 9S TC TD JC JD QC QD KC KD AC AD\n");
+        list.add("6D 6H 7D 7H 8C 8D 9D 9H TD TH JS JH QS QH KS KH AS AH\n" +
+                "6C 6S 7C 7S 8S 8H 9C 9S TC TS JC JD QC QD KC KD AC AD\n");
+        list.add("6D 6H 7D 7H 8C 8D 9D 9H TD TH JD JH QS QH KS KH AS AH \n" +
+                "6C 6S 7C 7S 8S 8H 9C 9S TC TS JC JS QC QD KC KD AC AD\n");
 
         String s = generateString();
 
-        for (String str: list) {
-            pw.println(str);
-            pw.println(s);
-        }
+        pw.println(s);
     }
 
     static Random random = new Random();
     private static String generateString() {
         cards = new boolean[9][4];
-        int cou = 0;
-        while (cou < 18) {
-            int i = random.nextInt(9);
-            int j = random.nextInt(4);
-            if (!cards[i][j]) {
-                cou++;
-                cards[i][j] = true;
-            }
-        }
+        cards[0][0] = false;
+        cards[0][1] = true;
+        cards[0][2] = false;
+        cards[0][3] = true;
+        cards[1][0] = false;
+        cards[1][1] = true;
+        cards[1][2] = false;
+        cards[1][3] = true;
+        cards[2][0] = true;
+        cards[2][1] = true;
+        cards[2][2] = false;
+        cards[2][3] = false;
+        cards[3][0] = false;
+        cards[3][1] = true;
+        cards[3][2] = false;
+        cards[3][3] = true;
+        cards[4][0] = false;
+        cards[4][1] = true;
+        cards[4][2] = false;
+        cards[4][3] = true;
+        cards[5][0] = false;
+        cards[5][1] = true;
+        cards[5][2] = false;
+        cards[5][3] = true;
+        cards[6][0] = false;
+        cards[6][1] = false;
+        cards[6][2] = true;
+        cards[6][3] = true;
+        cards[7][0] = false;
+        cards[7][1] = false;
+        cards[7][2] = true;
+        cards[7][3] = true;
+        cards[8][0] = false;
+        cards[8][1] = false;
+        cards[8][2] = true;
+        cards[8][3] = true;
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 4; j++) {

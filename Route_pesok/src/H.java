@@ -2,10 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class FastScanner {
+public class H {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -61,11 +60,58 @@ public class FastScanner {
         pw.close();
     }
 
+    static int n;
+    static int m;
+    static int[][] arr;
+    static boolean[][] used;
+    static boolean[] usedBukva;
+
     private static void solve() {
-        int n = nextInt();
-        int[] arr = new int[n];
+        n = nextInt();
+        m = nextInt();
+        arr = new int[n][m];
+        used = new boolean[n][m];
         for (int i = 0; i < n; i++) {
-            arr[i] = nextInt();
+            String s = nextLine();
+            for (int j = 0; j < m; j++) {
+                int t = s.charAt(j) - 'A';
+                if ((i + j) % 2 == 0) {
+                    arr[i][j] = t;
+                } else {
+                    arr[i][j] = -1;
+                }
+            }
         }
+
+        usedBukva = new boolean[26];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (arr[i][j] != -1 && !used[i][j]) {
+                    if (usedBukva[arr[i][j]]) {
+                        pw.println("NO");
+                        return;
+                    } else {
+                        usedBukva[arr[i][j]] = true;
+                        add(i, j, arr[i][j]);
+                    }
+                }
+            }
+        }
+        pw.println("YES");
+    }
+
+    private static void add(int i, int j, int bukva) {
+        if (i < 0 || i >= n || j < 0 || j >= m) return;
+        if (arr[i][j] != bukva) return;
+        if (used[i][j]) return;
+
+        used[i][j] = true;
+        add(i, j - 2, bukva);
+        add(i, j + 2, bukva);
+        add(i - 1, j - 1, bukva);
+        add(i - 1, j + 1, bukva);
+        add(i + 1, j - 1, bukva);
+        add(i + 1, j + 1, bukva);
     }
 }

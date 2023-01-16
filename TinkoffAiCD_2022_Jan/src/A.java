@@ -2,11 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.StringTokenizer;
 
-public class MergeSort {
+public class A {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -62,47 +60,12 @@ public class MergeSort {
         pw.close();
     }
 
-    static Random random = new Random();
-    private static final int E = 100;
-
-    private static int randomInt() {
-        return random.nextInt(E) - E / 2;
-    }
-
     private static void solve() {
-        int n = 15;
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = randomInt();
-        }
-        pw.println(Arrays.toString(arr));
-        mergeSort(arr, 0, n - 1);
-        pw.println(Arrays.toString(arr));
-    }
-    private static void mergeSort(int[] arr, int l, int r) {
-        if (l == r) return;
-        mergeSort(arr, l, (r + l) / 2);
-        mergeSort(arr, (r + l) / 2 + 1, r);
-        int[] temp = new int[r - l + 1];
-        int cur1 = l;
-        int cur2 = (r + l) / 2 + 1;
-        for (int i = 0; i < temp.length; i++) {
-            if (cur1 > (r + l) / 2) {
-                temp[i] = arr[cur2++];
-                continue;
-            }
-            if (cur2 > r) {
-                temp[i] = arr[cur1++];
-                continue;
-            }
-            if (arr[cur1] < arr[cur2]) {
-                temp[i] = arr[cur1++];
-            } else {
-                temp[i] = arr[cur2++];
-            }
-        }
-        for (int i = 0; i < temp.length; i++) {
-            arr[l + i] = temp[i];
+        int n = nextInt();
+        if (n % 3 != 0) {
+            pw.println(0);
+        } else {
+            pw.println((long) Math.pow(2, n / 3));
         }
     }
 }

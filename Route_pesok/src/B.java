@@ -2,10 +2,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Stack;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class FastScanner {
+public class B {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -63,9 +64,16 @@ public class FastScanner {
 
     private static void solve() {
         int n = nextInt();
-        int[] arr = new int[n];
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            arr[i] = nextInt();
+            int t = nextInt();
+            if (!map.containsKey(t)) map.put(t, 0);
+            map.put(t, map.get(t) + 1);
         }
+        long sum = 0;
+        for (var e : map.entrySet()) {
+            sum += (e.getValue() % 3 + e.getValue() / 3 * 2) * e.getKey();
+        }
+        pw.println(sum);
     }
 }

@@ -2,9 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class K {
+public class I {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -62,48 +62,63 @@ public class K {
 
     private static void solve() {
         int n = nextInt();
-        int k = nextInt();
-        if (n == 1 && k == 1) {
-            pw.println("YES");
-            pw.println(0);
-            return;
+        int m = nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = nextInt();
         }
-        if (n == 2 && k == 1) {
-            pw.println("YES");
-            pw.println(1);
-            pw.println("1 2");
-            return;
+
+        TreeSet<Pair> set = new TreeSet<>(Comparator.comparingInt(o -> o.c));
+
+        for (int i = 0; i < n; i++) {
+            set.add(new Pair(i, arr[i]));
         }
-        if (k >= n) {
-            pw.println("NO");
-            return;
-        }
-        int count = 0;
-        for (int i = 1; i <= n - k; i++) {
-            for (int j = i + 1; j <= n; j++) {
-                count++;
+
+        TreeMap<Integer, List<Pair>> time = new TreeMap<>();
+
+        long ans = 0;
+
+        for (int i = 0; i < m; i++) {
+            int t = nextInt();
+            int l = nextInt();
+            while (!time.isEmpty() && time.firstKey() <= t) {
+                set.addAll(time.pollFirstEntry().getValue());
+            }
+            try {
+                ans += (long) set.first().c * l;
+                if (!time.containsKey(t + l)) time.put(t + l, new ArrayList<>());
+                time.get(t + l).add(set.pollFirst());
+            } catch (Exception ignored) {
+
             }
         }
-        int witout = 1;
-        for (int i = n - k + 1; i <= n; i++) {
-            for (int j = i + 1; j <= n - witout; j++) {
-                count++;
-            }
-            witout++;
+        pw.println(ans);
+    }
+
+    public static class Pair {
+        int name;
+        int c;
+
+        public Pair(int name, int c) {
+            this.name = name;
+            this.c = c;
         }
-        pw.println("YES");
-        pw.println(count);
-        for (int i = 1; i <= n - k; i++) {
-            for (int j = i + 1; j <= n; j++) {
-                pw.printf("%d %d\n", i, j);
-            }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Pair pair)) return false;
+
+            if (name != pair.name) return false;
+            return c == pair.c;
         }
-        witout = 1;
-        for (int i = n - k + 1; i <= n; i++) {
-            for (int j = i + 1; j <= n - witout; j++) {
-                pw.printf("%d %d\n", i, j);
-            }
-            witout++;
+
+        @Override
+        public int hashCode() {
+            int result = name;
+            result = 31 * result + c;
+            return result;
         }
     }
+
 }

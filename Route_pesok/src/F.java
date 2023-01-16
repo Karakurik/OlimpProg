@@ -2,11 +2,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 
-public class Backend2 {
+public class F {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -17,7 +20,7 @@ public class Backend2 {
                 st = new StringTokenizer(br.readLine());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return st.nextToken();
     }
@@ -38,7 +41,7 @@ public class Backend2 {
         try {
             return br.readLine();
         } catch (IOException e) {
-            throw new IllegalArgumentException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -46,51 +49,52 @@ public class Backend2 {
         try {
             return (char) br.read();
         } catch (IOException e) {
-            throw new IllegalArgumentException(e);
+            throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
         int t = 1;
-//        t = nextInt();
+        t = nextInt();
         while (t-- > 0) {
             solve();
         }
+
         pw.close();
     }
 
     private static void solve() {
         int n = nextInt();
-        int q = nextInt();
-        Map<Integer, Node> map = new HashMap<>();
-        for (int i = 1; i <= n; i++) {
-            Node newNode = new Node();
-            int t = i / 2;
-            if (t >= 1) {
-                newNode.parent = map.get(t);
-                if (2 * t == i) {
-                    map.get(t).left = newNode;
-                } else {
-                    map.get(t).right = newNode;
+        LocalTime[][] arr = new LocalTime[n][2];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss");
+        boolean flag = false;
+        for (int i = 0; i < n; i++) {
+            String[] s = nextLine().split("-");
+            try {
+                arr[i][0] = LocalTime.parse(s[0]);
+                arr[i][1] = LocalTime.parse(s[1]);
+                if (arr[i][0].isAfter(arr[i][1])) {
+                    flag = true;
                 }
+            } catch (Exception e) {
+                flag = true;
             }
         }
-        for (int i = 0; i < q; i++) {
-            int t = nextInt();
-            Node с = map.get(t);
-            Node p = с.parent;
-            Node pp = p.parent;
-            if (pp == null) {
+        if (flag) {
+            pw.println("NO");
+            return;
+        }
 
+        Arrays.sort(arr, Comparator.comparing(o -> o[0]));
+
+        for (int i = 1; i < n; i++) {
+            if (!arr[i-1][1].isBefore(arr[i][0])) {
+                pw.println("NO");
+                return;
             }
         }
-    }
-
-    static class Node {
-        Node parent;
-        Node left;
-        Node right;
+        pw.println("YES");
     }
 }

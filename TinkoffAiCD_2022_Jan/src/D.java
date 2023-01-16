@@ -2,10 +2,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Stack;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class FastScanner {
+public class D {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -53,7 +53,7 @@ public class FastScanner {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
         int t = 1;
-        t = nextInt();
+//        t = nextInt();
         while (t-- > 0) {
             solve();
         }
@@ -63,9 +63,19 @@ public class FastScanner {
 
     private static void solve() {
         int n = nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = nextInt();
+        int[] arr = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = i; j <= n; j += i) {
+                arr[j]++;
+            }
         }
+        int ans = n;
+        for (int i = n; i > 0; i--) {
+            if (arr[i] > arr[ans]) {
+                ans = i;
+            }
+        }
+        pw.println(ans);
+        pw.println(arr[ans]);
     }
 }

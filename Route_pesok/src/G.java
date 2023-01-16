@@ -2,9 +2,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
 
-public class Test {
+public class G {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -61,12 +64,46 @@ public class Test {
     }
 
     private static void solve() {
-        pw.println(
-                (int) Math.round(
-                        Math.log(1 / (Math.PI * 1_000_000_001)) / Math.log(10)
-                        +
-                        2_000_000_002 * Math.log(2) / Math.log(10)
-                )
-        );
+        int n = nextInt();
+        int m = nextInt();
+        Set<Integer>[] arr = new Set[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = new HashSet<>();
+        }
+        for (int i = 0; i < m; i++) {
+            int x = nextInt() - 1;
+            int y = nextInt() - 1;
+            arr[x].add(y);
+            arr[y].add(x);
+        }
+        for (int i = 0; i < n; i++) {
+            Set<Integer> friends2 = new HashSet<>();
+            for (int f : arr[i]) {
+                friends2.addAll(arr[f]);
+            }
+            friends2.removeAll(arr[i]);
+            friends2.remove(i);
+            int cou = 0;
+            TreeSet<Integer> ansFriends = new TreeSet<>();
+            for (int cand : friends2) {
+                Set<Integer> fr = new HashSet<>(arr[cand]);
+                fr.retainAll(arr[i]);
+                if (fr.size() > cou) {
+                    ansFriends.clear();
+                    cou = fr.size();
+                }
+                if (fr.size() == cou) {
+                    ansFriends.add(cand);
+                }
+            }
+            if (ansFriends.isEmpty()) {
+                pw.println(0);
+            } else {
+                for (int el : ansFriends) {
+                    pw.print((el + 1) + " ");
+                }
+                pw.println();
+            }
+        }
     }
 }

@@ -2,11 +2,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 
-public class E {
+public class D {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter pw;
@@ -17,7 +17,7 @@ public class E {
                 st = new StringTokenizer(br.readLine());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return st.nextToken();
     }
@@ -38,7 +38,7 @@ public class E {
         try {
             return br.readLine();
         } catch (IOException e) {
-            throw new IllegalArgumentException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -46,62 +46,47 @@ public class E {
         try {
             return (char) br.read();
         } catch (IOException e) {
-            throw new IllegalArgumentException(e);
+            throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         br = new BufferedReader(new InputStreamReader(System.in));
         pw = new PrintWriter(System.out);
         int t = 1;
-//        t = nextInt();
+        t = nextInt();
         while (t-- > 0) {
             solve();
         }
+
         pw.close();
     }
 
     private static void solve() {
         int n = nextInt();
         int m = nextInt();
-        List<Integer>[][] arr = new List[n+1][3];
-        for (int i = 0; i < n+1; i++) {
-            for (int j = 0; j < 3; j++) {
-                arr[i][j] = new ArrayList<>();
-            }
-        }
-        for (int i = 0; i < m; i++) {
-            String[] s = nextLine().split(" ");
-
-            if (s[2].equals("g")) {
-                arr[Integer.parseInt(s[0])][0].add(Integer.parseInt(s[1]));
-            }
-
-            if (s[2].equals("y")) {
-                arr[Integer.parseInt(s[0])][1].add(Integer.parseInt(s[1]));
-            }
-
-            if (s[2].equals("r")) {
-                arr[Integer.parseInt(s[1])][2].add(Integer.parseInt(s[0]));
-            }
-        }
-        long[][] ans2 = new long[n + 1][n + 1];
-        for (int f = 1; f < n+1; f++) {
-            for (int s: arr[f][0]) {
-                for (int t: arr[s][1]) {
-                    ans2[f][t]++;
-                }
+        int[][] arr = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                arr[i][j] = nextInt();
             }
         }
         int q = nextInt();
         for (int i = 0; i < q; i++) {
-            int x = nextInt();
-            int y = nextInt();
-            long ans = 0;
-            for(int t: arr[y][2]) {
-                ans += ans2[x][t];
-            }
-            pw.println(ans);
+            int x = nextInt() - 1;
+            Arrays.sort(arr, new Comparator<int[]>() {
+                @Override
+                public int compare(int[] o1, int[] o2) {
+                    return o1[x] - o2[x];
+                }
+            });
         }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                pw.print(arr[i][j] + " ");
+            }
+            pw.println();
+        }
+        pw.println();
     }
 }
